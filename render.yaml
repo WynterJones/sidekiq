@@ -5,11 +5,12 @@ services:
     env: ruby
     region: oregon
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq -r ./main.rb
-    autoDeploy: false
+    startCommand: bundle exec sidekiq
     envVars:
       - key: REDIS_URL
         fromService:
           type: redis
           name: sidekiq-redis
           property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
